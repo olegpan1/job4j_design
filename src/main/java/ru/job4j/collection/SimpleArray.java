@@ -8,32 +8,31 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
 
     T[] simpleArray;
-    int nextIndex = 0;
-    int modCount = 0;
-    int iteratorCount = 0;
+    private int nextIndex;
+    private int modCount;
 
-    public SimpleArray(int size) {
-        this.simpleArray = (T[]) new Object[size];
+    public SimpleArray(int length) {
+        this.simpleArray = (T[]) new Object[length];
     }
 
     public void add(T model) {
         if (nextIndex <= simpleArray.length - 1) {
-            simpleArray[nextIndex] = model;
             modCount++;
+            simpleArray[nextIndex] = model;
             nextIndex++;
         }
     }
 
     public void set(int index, T model) {
         Objects.checkIndex(index, nextIndex);
-        simpleArray[index] = model;
         modCount++;
+        simpleArray[index] = model;
     }
 
     public void remove(int index) {
         Objects.checkIndex(index, nextIndex);
-        System.arraycopy(simpleArray, index + 1, simpleArray, index, nextIndex - 1);
         modCount++;
+        System.arraycopy(simpleArray, index + 1, simpleArray, index, nextIndex - 1);
         nextIndex--;
     }
 
@@ -51,6 +50,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<>() {
             final int expectedModCount = modCount;
+            private int iteratorCount;
 
             @Override
             public boolean hasNext() {

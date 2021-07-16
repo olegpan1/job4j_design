@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class SimpleArray<T> implements Iterable<T> {
 
-    T[] simpleArray;
+    private T[] simpleArray;
     private int nextIndex;
     private int modCount;
 
@@ -32,7 +32,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public void remove(int index) {
         Objects.checkIndex(index, nextIndex);
         modCount++;
-        System.arraycopy(simpleArray, index + 1, simpleArray, index, nextIndex - 1);
+        System.arraycopy(simpleArray, index + 1, simpleArray, index, nextIndex - index - 1);
         nextIndex--;
     }
 

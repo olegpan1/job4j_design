@@ -43,6 +43,18 @@ public class SimpleArrayTest {
     }
 
     @Test
+    public void whenAddThenRemoveLast() {
+        SimpleArray<String> array = new SimpleArray<>(4);
+        array.add("1");
+        array.add("2");
+        array.add("3");
+        array.add("4");
+        array.remove(3);
+        String rsl = array.get(2);
+        assertThat(rsl, is("3"));
+    }
+
+    @Test
     public void whenAddThenIt() {
         SimpleArray<String> array = new SimpleArray<>(10);
         array.add("1");

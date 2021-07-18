@@ -1,9 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleArray<T> implements Iterable<T> {
 
@@ -11,16 +8,21 @@ public class SimpleArray<T> implements Iterable<T> {
     private int nextIndex;
     private int modCount;
 
+    public SimpleArray() {
+        this.simpleArray = (T[]) new Object[1];
+    }
+
     public SimpleArray(int length) {
         this.simpleArray = (T[]) new Object[length];
     }
 
     public void add(T model) {
-        if (nextIndex <= simpleArray.length - 1) {
-            modCount++;
-            simpleArray[nextIndex] = model;
-            nextIndex++;
+        if (nextIndex == simpleArray.length) {
+            simpleArray = increaseArrayLength(simpleArray.length);
         }
+        modCount++;
+        simpleArray[nextIndex] = model;
+        nextIndex++;
     }
 
     public void set(int index, T model) {
@@ -39,6 +41,10 @@ public class SimpleArray<T> implements Iterable<T> {
     public T get(int index) {
         Objects.checkIndex(index, nextIndex);
         return simpleArray[index];
+    }
+
+    public T[] increaseArrayLength(int oldCapacity) {
+        return Arrays.copyOf(simpleArray, oldCapacity * 2);
     }
 
     /**

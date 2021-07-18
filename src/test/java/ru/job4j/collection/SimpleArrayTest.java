@@ -12,7 +12,7 @@ import static org.junit.Assert.assertThat;
 public class SimpleArrayTest {
     @Test
     public void whenAddThenGet() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         String rsl = array.get(0);
         assertThat(rsl, is("first"));
@@ -20,7 +20,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAddThenSet() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("1");
         array.add("2");
         array.add("3");
@@ -32,7 +32,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAddThenRemove() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("1");
         array.add("2");
         array.add("3");
@@ -44,7 +44,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAddThenRemoveLast() {
-        SimpleArray<String> array = new SimpleArray<>(4);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("1");
         array.add("2");
         array.add("3");
@@ -56,7 +56,7 @@ public class SimpleArrayTest {
 
     @Test
     public void whenAddThenIt() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("1");
         array.add("2");
         array.add("3");
@@ -70,20 +70,20 @@ public class SimpleArrayTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetEmpty() {
-        SimpleArray<String> array = new SimpleArray<>(0);
+        SimpleArray<String> array = new SimpleArray<>();
         array.get(0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenGetOutBound() {
-        SimpleArray<String> array = new SimpleArray<>(1);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         array.get(1);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenSetOutBound() {
-        SimpleArray<String> array = new SimpleArray<>(5);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         array.set(3, "second");
     }
@@ -91,23 +91,38 @@ public class SimpleArrayTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenRemoveOutBound() {
-        SimpleArray<String> array = new SimpleArray<>(5);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         array.remove(3);
     }
 
     @Test(expected = NoSuchElementException.class)
     public void whenGetEmptyFromIt() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.iterator().next();
     }
 
     @Test(expected = ConcurrentModificationException.class)
     public void whenCorruptedIt() {
-        SimpleArray<String> array = new SimpleArray<>(10);
+        SimpleArray<String> array = new SimpleArray<>();
         array.add("first");
         Iterator<String> it = array.iterator();
         array.add("second");
         it.next();
+    }
+
+    @Test
+    public void whenSetLengthThenIncrease() {
+        SimpleArray<String> array = new SimpleArray<>(2);
+        array.add("0");
+        array.add("1");
+        array.add("2");
+        array.add("3");
+        array.add("4");
+        assertThat(array.get(0), is("0"));
+        assertThat(array.get(1), is("1"));
+        assertThat(array.get(2), is("2"));
+        assertThat(array.get(3), is("3"));
+        assertThat(array.get(4), is("4"));
     }
 }

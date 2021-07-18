@@ -79,5 +79,4 @@ public class SimpleLinkedListTest {
         list.iterator().next();
     }
 
-
 }

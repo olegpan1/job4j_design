@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public class SimpleLinkedList<E> implements List<E> {
 
-    private Node<E> firstNode;
-    private Node<E> lastNode;
+    private final Node<E> firstNode;
+    private final Node<E> lastNode;
     private int size;
     private int modCount;
 
@@ -40,7 +40,6 @@ public class SimpleLinkedList<E> implements List<E> {
             firstNode.currentValue = value;
         }
         size++;
-
     }
 
     @Override
@@ -64,8 +63,8 @@ public class SimpleLinkedList<E> implements List<E> {
 
             final int expectedModCount = modCount;
             private int iteratorCount;
-            Node<E> iteratorCurrent;
-            Node<E> iteratorNext = firstNode;
+            Node<E> iteratorCurrent = firstNode;
+            E value;
 
             @Override
             public boolean hasNext() {
@@ -80,10 +79,10 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                iteratorCurrent = iteratorNext;
-                iteratorNext = iteratorCurrent.nextNode;
+                value = iteratorCurrent.currentValue;
+                iteratorCurrent = iteratorCurrent.nextNode;
                 iteratorCount++;
-                return iteratorCurrent.currentValue;
+                return value;
             }
         };
     }

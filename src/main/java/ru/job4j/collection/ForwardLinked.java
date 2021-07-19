@@ -28,6 +28,15 @@ public class ForwardLinked<T> implements Iterable<T> {
         return rsl;
     }
 
+    public void addFirst(T value) {
+        if (head == null) {
+            head = new Node<>(value, null);
+            return;
+        }
+        Node<T> tail = head;
+        head = new Node<>(value, tail);
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<>() {

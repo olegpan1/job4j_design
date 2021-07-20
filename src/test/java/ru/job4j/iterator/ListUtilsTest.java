@@ -103,16 +103,16 @@ public class ListUtilsTest {
 
     @Test
     public void whenRemoveAllPartially() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        List<Integer> elements = new ArrayList<>(Arrays.asList(2, 3, 4));
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 2, 3));
+        List<Integer> elements = new ArrayList<>(Arrays.asList(2, 3, 4, 3, 4));
         ListUtils.removeAll(input, elements);
         assertThat(Arrays.asList(1, 5), Is.is(input));
     }
 
     @Test
     public void whenRemoveAllAll() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
-        List<Integer> elements = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 2, 3, 4, 5));
+        List<Integer> elements = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 3, 4));
         ListUtils.removeAll(input, elements);
         assertThat(Arrays.asList(), Is.is(input));
     }
@@ -120,7 +120,7 @@ public class ListUtilsTest {
     @Test
     public void whenRemoveAllInputEmpty() {
         List<Integer> input = new ArrayList<>(Arrays.asList());
-        List<Integer> elements = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        List<Integer> elements = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 3, 4));
         ListUtils.removeAll(input, elements);
         assertThat(Arrays.asList(), Is.is(input));
     }

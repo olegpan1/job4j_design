@@ -44,4 +44,13 @@ public class SimpleTree<E> implements Tree<E> {
         rsl = findByPredicate((parent) -> parent.value.equals(value));
         return rsl;
     }
+
+    @Override
+    public boolean isBinary() {
+        boolean rsl = false;
+        if (findByPredicate((parent) -> parent.children.size() > 2).isEmpty()) {
+            rsl = true;
+        }
+        return rsl;
+    }
 }

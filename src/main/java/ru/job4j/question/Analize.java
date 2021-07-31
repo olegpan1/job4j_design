@@ -15,10 +15,11 @@ public class Analize {
             prevMap.put(userMap.getId(), userMap.getName());
         }
         for (User user : current) {
-            if (!prevMap.containsKey(user.getId())) {
+            int userID = user.getId();
+            if (!prevMap.containsKey(userID)) {
                 add++;
             } else {
-                if (!user.getName().equals(prevMap.remove(user.getId()))) {
+                if (!user.getName().equals(prevMap.remove(userID))) {
                     ch++;
                 }
             }

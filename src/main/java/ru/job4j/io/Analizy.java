@@ -23,8 +23,8 @@ public class Analizy {
                     })
                     .filter(s -> !s.equals("-1"))
                     .forEach(in::add);
-            for (int i = 0; i < in.size(); i++) {
-                out.println(in.get(i++) + ";" + in.get(i) + ";");
+            for (int i = 0; i < in.size() - 1; i++) {
+                out.println(in.get(i) + ";" + in.get(++i) + ";");
             }
         } catch (Exception e) {
             e.printStackTrace();

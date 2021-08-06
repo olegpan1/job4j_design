@@ -11,18 +11,19 @@ public class Analizy {
         try (BufferedReader read = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))
         ) {
-            read.lines()
-                    .map(s -> {
-                        if (in.size() % 2 == 0 && (s.startsWith("400") || s.startsWith("500"))) {
-                            return s.substring(4);
-                        }
-                        if (in.size() % 2 != 0 && (s.startsWith("200") || s.startsWith("300"))) {
-                            return s.substring(4);
-                        }
-                        return "-1";
-                    })
-                    .filter(s -> !s.equals("-1"))
-                    .forEach(in::add);
+            String line = read.readLine();
+            while (line != null) {
+                if ((line.startsWith("400") || line.startsWith("500"))) {
+                    in.add(line.substring(4));
+                    while (line != null && (line.startsWith("400") || line.startsWith("500"))) {
+                        line = read.readLine();
+                    }
+                    if (line != null) {
+                        in.add(line.substring(4));
+                    }
+                }
+                line = read.readLine();
+            }
             for (int i = 0; i < in.size() - 1; i++) {
                 out.println(in.get(i) + ";" + in.get(++i) + ";");
             }

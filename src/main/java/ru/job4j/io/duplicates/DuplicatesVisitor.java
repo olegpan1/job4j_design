@@ -26,7 +26,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         long size = file.toFile().length();
         String name = file.toFile().getName();
-        mapFile.merge(new FileProperty(size, name), 1, (a, b) -> b + 1);
+        mapFile.merge(new FileProperty(size, name), 1, (a, b) -> a + 1);
         return super.visitFile(file, attrs);
     }
 }

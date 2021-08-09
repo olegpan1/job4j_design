@@ -8,7 +8,7 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("Arguments not found");
+            throw new IllegalArgumentException("Bad argument or arguments not found. For example please usage: -path=targetFileName -delimiter=someDelimiter  -out=sourceFileName -filter=columnName1,columnName2");
         }
         return values.get(key);
     }
@@ -16,7 +16,7 @@ public class ArgsName {
     private void parse(String[] args) {
         for (String str : args) {
             if (!str.startsWith("-") || !str.contains("=") || str.endsWith("=")) {
-                throw new IllegalArgumentException("Bad arguments(" + str + "). Usage java -parameter=value");
+                throw new IllegalArgumentException("Bad argument or arguments not found. For example please usage: -path=targetFileName -delimiter=someDelimiter  -out=sourceFileName -filter=columnName1,columnName2");
             }
             String[] keyValue = str.substring(1).split("=");
             values.put(keyValue[0], keyValue[1]);
@@ -33,7 +33,7 @@ public class ArgsName {
         ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
         System.out.println(jvm.get("Xmx"));
 
-        ArgsName zip = ArgsName.of(new String[]{"out=project.zip", "-encoding=UTF-8"});
+        ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
 }

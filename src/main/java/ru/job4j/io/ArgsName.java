@@ -8,7 +8,9 @@ public class ArgsName {
 
     public String get(String key) {
         if (!values.containsKey(key)) {
-            throw new IllegalArgumentException("Bad argument or arguments not found. For example please usage: -path=targetFileName -delimiter=someDelimiter  -out=sourceFileName -filter=columnName1,columnName2");
+            throw new IllegalArgumentException("Bad argument or arguments not found. "
+                    + "For example please usage: -path=targetFileName -delimiter=\"someDelimiter\"  "
+                    + "-out=sourceFileName -filter=columnName1,columnName2");
         }
         return values.get(key);
     }
@@ -16,7 +18,9 @@ public class ArgsName {
     private void parse(String[] args) {
         for (String str : args) {
             if (!str.startsWith("-") || !str.contains("=") || str.endsWith("=")) {
-                throw new IllegalArgumentException("Bad argument or arguments not found. For example please usage: -path=targetFileName -delimiter=someDelimiter  -out=sourceFileName -filter=columnName1,columnName2");
+                throw new IllegalArgumentException("Bad argument or arguments not found. "
+                        + "For example please usage: -path=targetFileName -delimiter=\"someDelimiter\"  "
+                        + "-out=sourceFileName -filter=columnName1,columnName2");
             }
             String[] keyValue = str.substring(1).split("=");
             values.put(keyValue[0], keyValue[1]);

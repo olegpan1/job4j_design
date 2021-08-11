@@ -4,77 +4,69 @@ import ru.job4j.io.ArgsName;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CSVReader {
-    List<UserCSV> list = new ArrayList<>();
+    List<InfoCSV> list = new ArrayList<>();
+    String[] title;
+    StringBuilder filterResult = new StringBuilder();
 
-    public void filterCSV(Path sources, String delimiter, String target, String[] filter) throws FileNotFoundException {
-// Куда выводить результат
-        PrintStream ps = new PrintStream(target);
-        if (target.equals("stdout")) {
-            ps = new PrintStream(System.out);
-        }
+    public void manageCSV(Path sources, String delimiter, String target, String[] filter) throws FileNotFoundException {
+        // Считывание из CSV
+        readCSV(sources, delimiter);
+        //Фильтрация данных
+        filterCSV(delimiter, filter);
+        // Запись результата в CSV
+        writeCSV(filterResult, target);
+    }
 
-        try (BufferedOutputStream out = new BufferedOutputStream(ps);
-             var scanner = new Scanner(new BufferedInputStream(new FileInputStream(sources.toString())))
-                     .useDelimiter("\r\n")) {
-// Считывание названий колонок
+    public void readCSV(Path sources, String delimiter) throws FileNotFoundException {
+        try (var scanner = new Scanner(new BufferedInputStream(new FileInputStream(sources.toString())))
+                .useDelimiter(System.lineSeparator())) {
+            // Считывание названий колонок
             if (scanner.hasNext()) {
-                String[] title = scanner.next().split(delimiter);
+                title = scanner.next().split(delimiter);
             }
-
-// Считывание данных пользователей
+            // Считывание данных
             while (scanner.hasNext()) {
                 String[] scArray = scanner.next().split(delimiter);
-                UserCSV userCSV = new UserCSV(
-                        scArray[0], Integer.parseInt(scArray[1]), scArray[2], scArray[3], Integer.parseInt(scArray[4]));
-                list.add(userCSV);
-            }
-
-// Вывод списка фильтров
-            for (String filterTitle : filter) {
-                out.write((filterTitle + delimiter).getBytes());
-            }
-            out.write(System.lineSeparator().getBytes());
-
-// Вывод отфильтрованных данных пользователей
-            for (UserCSV usr : list) {
-                for (String f : filter) {
-                    out.write(filter(usr, f, delimiter).getBytes());
+                Map<String, String> line = new HashMap<>();
+                int i = 0;
+                for (String t : title) {
+                    line.put(t, scArray[i++]);
                 }
-                out.write(System.lineSeparator().getBytes());
+                list.add(new InfoCSV(line));
             }
-            out.write(System.lineSeparator().getBytes());
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Please provide the correct name of the source file in parameter  -path");
+//            e.printStackTrace();
+        }
+    }
 
+    public void writeCSV(StringBuilder rsl, String target) {
+        try (BufferedOutputStream out = new BufferedOutputStream((target.equals("stdout"))
+                ? new PrintStream(System.out) : new PrintStream(target))) {
+            out.write(rsl.toString().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public String filter(UserCSV user, String s, String delimiter) {
-        String rsl = "";
-        switch (s) {
-            case "name":
-                rsl = user.getName() + delimiter;
-                break;
-            case "age":
-                rsl = user.getAge() + delimiter;
-                break;
-            case "birthDate":
-                rsl = user.getBirthDate() + delimiter;
-                break;
-            case "education":
-                rsl = user.getEducation() + delimiter;
-                break;
-            case "children":
-                rsl = user.getChildren() + delimiter;
-                break;
-            default:
+    //Фильтрация данных
+    public void filterCSV(String delimiter, String[] filter) {
+        // Добавление заголовков фильтра
+        for (String filterTitle : filter) {
+            filterResult.append(filterTitle).append(delimiter);
         }
-        return rsl;
+        filterResult.append(System.lineSeparator());
+
+        // Добавление результата отбора по фильтру
+        for (InfoCSV info : list) {
+            for (String s : filter) {
+                filterResult.append(info.getMap().get(s)).append(delimiter);
+            }
+            filterResult.append(System.lineSeparator());
+        }
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -84,7 +76,6 @@ public class CSVReader {
         String target = arg.get("out");
         String[] filter = arg.get("filter").split(",");
         CSVReader csv = new CSVReader();
-        csv.filterCSV(source, delimiter, target, filter);
+        csv.manageCSV(source, delimiter, target, filter);
     }
-
 }

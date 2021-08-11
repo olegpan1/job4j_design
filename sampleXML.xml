@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car>
+    <car model="Porsche 911">
+        <inStock>true</inStock>
+        <dateOfManufacture>2005</dateOfManufacture>
+        <contact phone="0-123-456"/>
+        <descriptions>
+            <description>Red Color</description>,
+            <description>Cabriolet</description>
+        </descriptions>
+    </car>
+</car>

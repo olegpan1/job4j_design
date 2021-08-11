@@ -30,7 +30,7 @@ public class Person {
 
     public static void main(String[] args) {
 //        final Person person = new Person(false, 30, new Contact("11-111"), "Worker", "Married");
-        final Car car = new Car(true, 2010,
+        final Car car = new Car("Porsche 911", true, 2010,
                 new Contact("0-123-456"), "Red Color", "Cabriolet");
 
         /* Преобразуем объект person в json-строку. */

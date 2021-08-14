@@ -66,7 +66,7 @@ public class Car {
         list.add(car.getDescription()[0]);
         list.add("Cabriolet");
         JSONArray jsonDescription = new JSONArray(list);
-        System.out.println(jsonDescription.toString());
+        System.out.println(jsonDescription);
 
         /* JSONObject напрямую методом put */
         JSONObject jsonObject = new JSONObject();
@@ -76,10 +76,10 @@ public class Car {
         jsonObject.put("description", jsonDescription);
 
         /* Выведем результат в консоль */
-        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject);
 
         /* Преобразуем объект car в json-строку */
-        System.out.println(new JSONObject(car).toString());
+        System.out.println(new JSONObject(car));
     }
 
     @Override

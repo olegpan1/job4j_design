@@ -22,8 +22,7 @@ select * from employees e full join departments d on e.department_id = d.id;
 
 select * from employees e cross join departments d;
 
-select d.name from departments d left join employees e on e.department_id = d.id group by d.name
-having count(e.name) = 0;
+select * from departments d left join employees e on e.department_id = d.id where e.id is null;
 
 select * from employees e left join departments d on e.department_id = d.id;
 select * from departments d right join employees e  on e.department_id = d.id;

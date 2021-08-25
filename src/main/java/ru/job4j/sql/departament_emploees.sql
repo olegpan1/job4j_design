@@ -6,7 +6,7 @@ create table departments(
 create table employees(
     id serial primary key,
     name varchar(100),
-    department_id int references departments
+    department_id int references departments(id)
 );
 
 insert into departments(name) values ('Headoffice'), ('Finance'), ('Support'), ('PR');

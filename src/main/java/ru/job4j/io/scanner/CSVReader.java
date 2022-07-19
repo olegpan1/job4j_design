@@ -26,7 +26,6 @@ public class CSVReader {
     public void readCSV(Path sources, String delimiter, String[] filter) throws FileNotFoundException {
         try (var scanner = new Scanner(new BufferedInputStream(new FileInputStream(sources.toString())))
                 .useDelimiter(System.lineSeparator())) {
-            // Считывание названий колонок,проверка делимитра и  фильтра, определение номера колонок для вывода
             if (scanner.hasNext()) {
                 String delimiterCorrect = scanner.next();
                 if (!delimiterCorrect.contains(delimiter)) {
@@ -53,7 +52,6 @@ public class CSVReader {
                     }
                 }
             }
-            // Считывание  и сохранение отфильтрованных данных
             while (scanner.hasNext()) {
                 String[] scArray = scanner.next().split(delimiter);
                 for (Integer i : filterColumn) {
@@ -72,9 +70,7 @@ public class CSVReader {
         }
     }
 
-    //подготовка данных для выаода
     public void resultCSV(String delimiter) {
-
         int i = 0;
         while (i < list.size()) {
             int x = 0;

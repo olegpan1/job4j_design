@@ -1,0 +1,42 @@
+2022-07-20 13:33:08,174 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:33:32,649 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:33:57,204 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:34:21,198 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:41:17,490 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:41:29,107 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:42:13,732 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:42:45,952 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:46:26,163 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:48:48,775 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:49:01,516 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:49:24,383 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:50:15,504 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)
+2022-07-20 13:50:31,125 ERROR ru.job4j.io.UsageLog4j:main:14 - Exception in log example
+java.lang.Exception: Not supported code
+	at ru.job4j.io.UsageLog4j.main(UsageLog4j.java:12)

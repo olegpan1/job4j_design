@@ -70,6 +70,7 @@ public class FlatMapTest {
                 List.of().iterator(),
                 List.of(1).iterator()
         ).iterator();
+        @SuppressWarnings({"rawtypes", "unchecked"})
         FlatMap flat = new FlatMap(it);
         assertTrue(flat.hasNext());
         assertThat(1, is(flat.next()));
@@ -83,6 +84,7 @@ public class FlatMapTest {
                 List.of().iterator(),
                 List.of().iterator()
         ).iterator();
+        @SuppressWarnings({"rawtypes", "unchecked"})
         FlatMap flat = new FlatMap(it);
         assertFalse(flat.hasNext());
     }

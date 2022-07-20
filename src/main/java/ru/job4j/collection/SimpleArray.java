@@ -8,10 +8,12 @@ public class SimpleArray<T> implements Iterable<T> {
     private int nextIndex;
     private int modCount;
 
+    @SuppressWarnings("unchecked")
     public SimpleArray() {
         this.simpleArray = (T[]) new Object[1];
     }
 
+    @SuppressWarnings("unchecked")
     public SimpleArray(int length) {
         this.simpleArray = (T[]) new Object[length];
     }

@@ -15,6 +15,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private int modCount = 0;
 
+    @SuppressWarnings("unchecked")
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
     @Override
@@ -40,6 +41,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return (capacity - 1) & hash;
     }
 
+    @SuppressWarnings("unchecked")
     private void expand() {
         MapEntry<K, V>[] oldTable = table;
         capacity = capacity << 1;

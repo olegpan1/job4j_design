@@ -34,9 +34,6 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-//        packSingleFile(Paths.get("./data/target.txt"),
-//                Paths.get("./data/target.zip")
-//        );
         ArgsName arg = ArgsName.of(args);
         Path root = Paths.get(arg.get("d"));
         Path target = Paths.get(arg.get("o"));

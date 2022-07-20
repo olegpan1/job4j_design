@@ -15,11 +15,8 @@ public class CSVReader {
     StringBuilder filterResult = new StringBuilder();
 
     public void manageCSV(Path sources, String delimiter, String target, String[] filter) throws FileNotFoundException {
-        // Считывание из CSV файла и фильтрация данных
         readCSV(sources, delimiter, filter);
-        //Подготовка данных для вывода
         resultCSV(delimiter);
-        // Вывод результата в формате CSV
         writeCSV(target);
     }
 

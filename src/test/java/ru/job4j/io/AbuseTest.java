@@ -1,31 +1,29 @@
 package ru.job4j.io;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.List;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class AbuseTest {
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
-    public void drop() throws IOException {
-        File source = folder.newFile("source.txt");
-        File target = folder.newFile("target.txt");
+    public void drop(@TempDir Path tempDir) throws IOException {
+        File source = tempDir.resolve("source.txt").toFile();
+        File target = tempDir.resolve("target.txt").toFile();
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("hello foolish dude ");
+            out.println("java job4j php");
         }
-        Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(), List.of("foolish"));
+        Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(), List.of("foolish", "php"));
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
         }
-        assertThat(rsl.toString(), is("hello dude "));
+
+        assertThat(rsl.toString()).isEqualTo("hello dude java job4j ");
     }
 }

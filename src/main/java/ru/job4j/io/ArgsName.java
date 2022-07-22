@@ -16,14 +16,23 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
+        validate(args);
         for (String str : args) {
-            if (!str.startsWith("-") || !str.contains("=") || str.endsWith("=")) {
+            String[] keyValue = str.substring(1).split("=", 2);
+            values.put(keyValue[0], keyValue[1]);
+        }
+    }
+
+    private void validate(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Can't find arguments!");
+        }
+        for (String str : args) {
+            if (!str.startsWith("-") || !str.contains("=")) {
                 throw new IllegalArgumentException("Bad argument or arguments not found. "
                         + "For example please usage: -path=targetFileName -delimiter=\"someDelimiter\"  "
                         + "-out=sourceFileName -filter=columnName1,columnName2");
             }
-            String[] keyValue = str.substring(1).split("=");
-            values.put(keyValue[0], keyValue[1]);
         }
     }
 

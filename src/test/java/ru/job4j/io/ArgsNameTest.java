@@ -1,32 +1,38 @@
 package ru.job4j.io;
 
-import org.junit.Test;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.*;
 
 public class ArgsNameTest {
 
     @Test
-    public void whenGetFirst() {
+    void whenGetFirst() {
         ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
-        assertThat(jvm.get("Xmx"), is("512"));
+        assertThat(jvm.get("Xmx")).isEqualTo("512");
     }
 
     @Test
-    public void whenGetFirstReorder() {
+    void whenGetFirstReorder() {
         ArgsName jvm = ArgsName.of(new String[]{"-encoding=UTF-8", "-Xmx=512"});
-        assertThat(jvm.get("Xmx"), is("512"));
+        assertThat(jvm.get("Xmx")).isEqualTo("512");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenGetNotExist() {
-        ArgsName jvm = ArgsName.of(new String[]{});
-        jvm.get("Xmx");
+    @Test
+    void whenMultipleEqualsSymbol() {
+        ArgsName jvm = ArgsName.of(new String[]{"-request=?msg=Exit="});
+        assertThat(jvm.get("request")).isEqualTo("?msg=Exit=");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void whenWrongSomeArgument() {
-        ArgsName jvm = ArgsName.of(new String[]{"-enconding=UTF-8", "-Xmx="});
+    @Test
+    void whenGetNotExist() {
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512"});
+        assertThatThrownBy(() -> jvm.get("Xms"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenWrongSomeArgument() {
+        assertThatThrownBy(() -> ArgsName.of(new String[]{}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }

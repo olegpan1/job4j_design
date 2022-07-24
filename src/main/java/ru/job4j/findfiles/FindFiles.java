@@ -7,13 +7,11 @@ import java.nio.file.Paths;
 public class FindFiles {
     public static void main(String[] args) throws IOException {
         Args arg = Args.of(args);
+
         Path root = Paths.get(arg.get("d"));
-        Path file = Paths.get(arg.get("n"));
+        String  file = arg.get("n");
         String typeOfFind = arg.get("t");
         Path target = Paths.get(arg.get("o"));
-        if (!root.toFile().isDirectory()) {
-            throw new IllegalArgumentException("Source path not exist!");
-        }
 
     }
 

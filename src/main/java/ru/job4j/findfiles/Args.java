@@ -8,6 +8,7 @@ import java.util.Set;
 
 public class Args {
     private final Map<String, String> values = new HashMap<>();
+
     String ls = System.lineSeparator();
 
     public String get(String key) {
@@ -21,14 +22,16 @@ public class Args {
     }
 
     private void parse(String[] args) {
-        validate(args);
         for (String str : args) {
             String[] keyValue = str.substring(1).split("=", 2);
-            System.out.println(keyValue[0] + "  " + keyValue[1]);
+//            System.out.println(keyValue[0] + "  " + keyValue[1]);
             values.put(keyValue[0], keyValue[1]);
         }
+    }
+
+    private void validateKey() {
         if (!values.keySet().containsAll(Set.of("d", "n", "t", "o"))) {
-            throw new IllegalArgumentException("Bad parameters or parameters not found. "
+            throw new IllegalArgumentException("Wrong key! "
                     + ls + "For example please usage next keys: -d=searchDirectory "
                     + "-n=filename or mask or regex "
                     + ls + "-t=typeOfSearch(mask, name, regex) -o=resultFile");
@@ -38,26 +41,29 @@ public class Args {
         }
     }
 
-    private void validate(String[] args) {
+    private void validateInput(String[] args) {
         if (args.length != 4) {
-            throw new IllegalArgumentException("Can't find all arguments!"
-                    + ls + "For example please usage next keys: -d=searchDirectory "
+            throw new IllegalArgumentException("Can't find all keys!"
+                    + ls + "Please usage next keys: -d=searchDirectory "
                     + "-n=filename or mask or regex "
                     + ls + "-t=typeOfSearch(mask, name, regex) -o=resultFile");
         }
         for (String str : args) {
             if (!str.startsWith("-") || !str.contains("=")) {
-                throw new IllegalArgumentException("Bad parameters or parameters not found. "
-                        + ls + "For example please usage next keys: -d=searchDirectory "
+                throw new IllegalArgumentException("Wrong key or key value! "
+                        + ls + "Please usage next keys: -d=searchDirectory "
                         + "-n=filename or mask or regex "
                         + ls + "-t=typeOfSearch(mask, name, regex) -o=resultFile");
             }
         }
     }
 
-    public static Args of(String[] args) {
+    public static Args startFind(String[] args) {
         Args names = new Args();
+        names.validateInput(args);
         names.parse(args);
+        names.validateKey();
+        System.out.println(names);
         return names;
     }
 }

@@ -12,7 +12,10 @@ import java.util.function.Predicate;
 public class Args {
     private final Map<String, String> values = new HashMap<>();
 
-    String ls = System.lineSeparator();
+    String errormessage = System.lineSeparator() + "For example please "
+            + "usage 4 next keys: -d=searchDirectory -n=filename or mask or regex "
+            + System.lineSeparator() + "-t=typeOfSearch(name, mask, regex) "
+            + "-o=resultFile.";
 
     public String getKeyValue(String key) {
         return values.get(key);
@@ -49,21 +52,15 @@ public class Args {
 
     private void validateKey() {
         if (!values.keySet().containsAll(Set.of("d", "n", "t", "o"))) {
-            throw new IllegalArgumentException("Wrong key! "
-                    + ls + "For example please usage 4 next keys: -d=searchDirectory "
-                    + "-n=filename or mask or regex "
-                    + ls + "-t=typeOfSearch(name, mask, regex) -o=resultFile");
+            throw new IllegalArgumentException("Wrong key! " + errormessage);
         }
         if (!Paths.get(values.get("d")).toFile().isDirectory()) {
             throw new IllegalArgumentException("Source path not exist!");
         }
         for (Map.Entry<String, String> value : values.entrySet()) {
             if (value.getValue().isBlank()) {
-                throw new IllegalArgumentException("Key value for -" + value + " not found!"
-                        + ls + "For example please 4 usage next keys: -d=searchDirectory "
-                        + "-n=filename or mask or regex "
-                        + ls + "-t=typeOfSearch(name, mask, regex) -o=resultFile");
-
+                throw new IllegalArgumentException("Key value for -" + value
+                        + " not found!" + errormessage);
             }
         }
     }
@@ -71,16 +68,12 @@ public class Args {
     private void validateInput(String[] args) {
         if (args.length != 4) {
             throw new IllegalArgumentException("Number of keys error!"
-                    + ls + "Please usage 4 next keys: -d=searchDirectory "
-                    + "-n=filename or mask or regex "
-                    + ls + "-t=typeOfSearch(name, mask, regex) -o=resultFile");
+                    + errormessage);
         }
         for (String str : args) {
             if (!str.startsWith("-") || !str.contains("=")) {
                 throw new IllegalArgumentException("Wrong key or key value! "
-                        + ls + "Please usage 4 next keys: -d=searchDirectory "
-                        + "-n=filename or mask or regex "
-                        + ls + "-t=typeOfSearch(name, mask, regex) -o=resultFile");
+                        + errormessage);
             }
         }
     }

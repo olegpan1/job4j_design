@@ -1,6 +1,5 @@
 package ru.job4j.findfiles;
 
-import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -18,10 +17,10 @@ public class FileVisitor extends SimpleFileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
         if (predicate.test(file)) {
         listOfFiles.add(file);
         }
-        return super.visitFile(file, attrs);
+        return FileVisitResult.CONTINUE;
     }
 }

@@ -38,7 +38,7 @@ public class Args {
                 return path ->
                         pathMatcher.matches(Paths.get(path.toFile().getName()));
             default:
-                throw new IllegalArgumentException("Key value for -n is wrong!"
+                throw new IllegalArgumentException("Key value for -t is wrong!"
                         + "Must be: name or mask or regex. ");
         }
     }

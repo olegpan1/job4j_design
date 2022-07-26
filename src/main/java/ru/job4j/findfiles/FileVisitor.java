@@ -9,11 +9,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class FileVisitor extends SimpleFileVisitor<Path> {
-    List<Path> listOfFiles = new ArrayList<>();
-    Predicate<Path> predicate;
+   private final List<Path> listOfFiles = new ArrayList<>();
+   private final Predicate<Path> predicate;
 
     public FileVisitor(Predicate<Path> predicate) {
         this.predicate = predicate;
+    }
+
+    public List<Path> getListOfFiles() {
+        return listOfFiles;
     }
 
     @Override

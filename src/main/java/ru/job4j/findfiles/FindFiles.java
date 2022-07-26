@@ -24,7 +24,7 @@ public class FindFiles {
     private static List<Path> find(Args arg) throws IOException {
         FileVisitor visitor = new FileVisitor(arg.getTypeOfSearch());
         Files.walkFileTree(Paths.get(arg.getKeyValue("d")), visitor);
-        return visitor.listOfFiles;
+        return visitor.getListOfFiles();
     }
 
 

@@ -16,7 +16,8 @@ class LibraryGeneratorTest {
     public void whenRight() {
         Generator generator = new LibraryGenerator();
         Map<String, String> keys = new HashMap<>();
-        keys.put("Petr Arsentev", "you");
+        keys.put("name", "Petr Arsentev");
+        keys.put("subject", "you");
         String expected = "I am a Petr Arsentev, Who are you? ";
         assertThat(expected).isEqualTo(generator.produce("I am a ${name}, Who are ${subject}? ", keys));
     }
@@ -25,7 +26,8 @@ class LibraryGeneratorTest {
     public void whenExtraKey() {
         Generator generator = new LibraryGenerator();
         Map<String, String> keys = new HashMap<>();
-        keys.put("Petr Arsentev", "you");
+        keys.put("name", "Petr Arsentev");
+        keys.put("subject", "you");
         assertThrows(IllegalArgumentException.class,
                 () -> generator.produce("I am a ${name}, I live in %{city}, Who are ${subject}? ", keys));
     }
@@ -34,7 +36,8 @@ class LibraryGeneratorTest {
     public void whenNotEnoughKey() {
         Generator generator = new LibraryGenerator();
         Map<String, String> keys = new HashMap<>();
-        keys.put("Petr Arsentev", "you");
+        keys.put("name", "Petr Arsentev");
+        keys.put("subject", "you");
         assertThrows(IllegalArgumentException.class,
                 () -> generator.produce("I am a ${name}, Hello! ", keys));
     }

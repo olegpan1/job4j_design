@@ -20,14 +20,15 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;"
-                + LS
-                + worker.getName() + ";"
-                + DATE_FORMAT.format(worker.getHired().getTime()) + ";"
-                + DATE_FORMAT.format(worker.getFired().getTime()) + ";"
-                + worker.getSalary() + ";"
-                + LS;
-        assertThat(engine.generate(em -> true)).isEqualTo(expect);
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Hired; Fired; Salary;")
+                .append(LS)
+                .append(worker.getName()).append(";")
+                .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
+                .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
+                .append(worker.getSalary()).append(";")
+                .append(LS);
+        assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
 
     @Test
@@ -37,17 +38,18 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report devReport = new DevReportEngine(store);
-        String expect = "<table>" + LS
-                + "<tr>" + LS
-                + "<th>Name</th><th>Hired</th><th>Fired</th><th>Salary</th>" + LS
-                + "<tr>" + LS + "<td>"
-                + worker.getName() + "</td><td>"
-                + worker.getHired() + "</td><td>"
-                + worker.getFired() + "</td><td>"
-                + worker.getSalary() + "</td>" + LS
-                + "</tr>" + LS
-                + "</table>" + LS;
-        assertThat(devReport.generate(em -> true)).isEqualTo(expect);
+        StringBuilder expect = new StringBuilder()
+                .append("<table>").append(LS)
+                .append("<tr>").append(LS)
+                .append("<th>Name</th><th>Hired</th><th>Fired</th><th>Salary</th>").append(LS)
+                .append("<tr>").append(LS).append("<td>")
+                .append(worker.getName()).append("</td><td>")
+                .append(worker.getHired()).append("</td><td>")
+                .append(worker.getFired()).append("</td><td>")
+                .append(worker.getSalary()).append("</td>").append(LS)
+                .append("</tr>").append(LS)
+                .append("</table>").append(LS);
+        assertThat(devReport.generate(em -> true)).isEqualTo(expect.toString());
     }
 
     @Test
@@ -57,14 +59,15 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report accReport = new AccountantReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;"
-                + LS
-                + worker.getName() + ";"
-                + DATE_FORMAT.format(worker.getHired().getTime()) + ";"
-                + DATE_FORMAT.format(worker.getFired().getTime()) + ";"
-                + NUMBER_TO_WORD.format(worker.getSalary()) + ";"
-                + LS;
-        assertThat(accReport.generate(em -> true)).isEqualTo(expect);
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Hired; Fired; Salary;")
+                .append(LS)
+                .append(worker.getName()).append(";")
+                .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
+                .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
+                .append(NUMBER_TO_WORD.format(worker.getSalary())).append(";")
+                .append(LS);
+        assertThat(accReport.generate(em -> true)).isEqualTo(expect.toString());
     }
 
     @Test
@@ -76,15 +79,16 @@ public class ReportEngineTest {
         store.add(worker1);
         store.add(worker2);
         Report hrReportReport = new HRReportEngine(store);
-        String expect = "Name; Salary;"
-                + LS
-                + worker2.getName() + ";"
-                + worker2.getSalary() + ";"
-                + LS
-                + worker1.getName() + ";"
-                + worker1.getSalary() + ";"
-                + LS;
-        assertThat(hrReportReport.generate(em -> true)).isEqualTo(expect);
+        StringBuilder expect = new StringBuilder()
+                .append("Name; Salary;")
+                .append(LS)
+                .append(worker2.getName()).append(";")
+                .append(worker2.getSalary()).append(";")
+                .append(LS)
+                .append(worker1.getName()).append(";")
+                .append(worker1.getSalary()).append(";")
+                .append(LS);
+        assertThat(hrReportReport.generate(em -> true)).isEqualTo(expect.toString());
     }
 
     @Test

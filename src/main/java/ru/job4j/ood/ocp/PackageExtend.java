@@ -15,7 +15,10 @@ public class PackageExtend {
         }
     }
 
-    private static class TransportPackage<T> {
+     class TransportPackage<T> {
+        private T transport;
+        private T destination;
+
         public T sendBySomething(BiFunction<T, T, T> function, T transport, T destination) {
             return function.apply(transport, destination);
         }

@@ -10,8 +10,8 @@ import java.util.function.Predicate;
 public final class XMLReportEngine implements Report {
 
     private Store store;
-    JAXBContext context;
-    Marshaller marshaller;
+    private JAXBContext context;
+    private Marshaller marshaller;
 
 
     public XMLReportEngine(Store store) {

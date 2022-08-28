@@ -1,11 +1,13 @@
 package ru.job4j.ood.lsp.parking;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 class RealParkingTest {
     private Set<Car> vehicles;
     private Set<Car> trucks;

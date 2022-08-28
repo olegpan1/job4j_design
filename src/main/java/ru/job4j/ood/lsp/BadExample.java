@@ -1,9 +1,9 @@
 package ru.job4j.ood.lsp;
 
-public class Bird {
+public class BadExample {
     protected int speed;
 
-    public Bird(int speed) {
+    public BadExample(int speed) {
         validate(speed);
         this.speed = speed;
     }
@@ -36,7 +36,7 @@ public class Bird {
  * выкидывается ошибка.
  */
 
-class Chicken extends Bird {
+class Chicken extends BadExample {
     public Chicken(int speed) {
         super(speed);
     }
@@ -50,7 +50,7 @@ class Chicken extends Bird {
 /**
  * Ошибка в классе Eagle - ослабленное постусловие (проверка корректности времени)
  */
-class Eagle extends Bird {
+class Eagle extends BadExample {
     public Eagle(int speed) {
         super(speed);
     }
@@ -64,7 +64,7 @@ class Eagle extends Bird {
 /**
  * Ошибка в классе Swift - нарушение состояния потомка, не сохранена проверка условия в сеттере
  */
-class Swift extends Bird {
+class Swift extends BadExample {
     public Swift(int speed) {
         super(speed);
     }

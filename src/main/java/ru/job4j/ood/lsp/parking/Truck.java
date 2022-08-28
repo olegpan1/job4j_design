@@ -7,15 +7,8 @@ public class Truck extends Car {
     private String number;
 
     public Truck(int size, String number) {
-        validate(size);
         this.size = size;
         this.number = number;
-    }
-
-    private void validate(int size) {
-        if (size <= 1) {
-            throw new IllegalArgumentException("Wrong truck size!");
-        }
     }
 
     @Override

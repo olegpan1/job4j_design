@@ -3,8 +3,8 @@ package ru.job4j.ood.lsp.parking;
 import java.util.Objects;
 
 public class Truck extends Car {
-    private int size;
-    private String number;
+    private final int size;
+    private final String number;
 
     public Truck(int size, String number) {
         this.size = size;
@@ -12,12 +12,12 @@ public class Truck extends Car {
     }
 
     @Override
-    int getSize() {
+    public int getSize() {
         return this.size;
     }
 
     @Override
-    String getNumber() {
+    public String getNumber() {
         return this.number;
     }
 

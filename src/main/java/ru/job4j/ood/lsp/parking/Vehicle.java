@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Vehicle extends Car {
     private static final int SIZE = 1;
-    private String number;
+    private final String number;
 
     public Vehicle(String number) {
         this.size = SIZE;
@@ -12,12 +12,12 @@ public class Vehicle extends Car {
     }
 
     @Override
-    int getSize() {
+    public int getSize() {
         return SIZE;
     }
 
     @Override
-    String getNumber() {
+    public String getNumber() {
         return this.number;
     }
 

@@ -6,10 +6,14 @@ import java.util.Set;
 public class RealParking implements Parking {
     private final Set<Car> vehicles;
     private final Set<Car> trucks;
+    private final int countVehicleSpaces;
+    private final int countTruckSpaces;
     private int vehicleSpacesFree;
     private int truckSpacesFree;
 
     public RealParking(int countVehicleSpaces, int countTruckSpaces) {
+        this.countVehicleSpaces = countVehicleSpaces;
+        this.countTruckSpaces = countTruckSpaces;
         this.vehicleSpacesFree = countVehicleSpaces;
         this.truckSpacesFree = countTruckSpaces;
         this.vehicles = new HashSet<>();
@@ -34,9 +38,12 @@ public class RealParking implements Parking {
 
     @Override
     public boolean addCar(Car car) {
+        if (vehicles.contains(car) || trucks.contains(car)) {
+            return false;
+        }
         int size = car.getSize();
         boolean freeSpace = checkFreeSpace(size);
-        if (freeSpace && size > 1 && truckSpacesFree >= 1) {
+        if (freeSpace && size > Car.SIZE && truckSpacesFree >= 1) {
             truckSpacesFree--;
             trucks.add(car);
             return true;
@@ -49,20 +56,25 @@ public class RealParking implements Parking {
     }
 
     @Override
-    public boolean deleteCar(Car car) {
-        if (trucks.contains(car)) {
-            truckSpacesFree++;
-            return trucks.remove(car);
-        } else if (vehicles.contains(car)) {
-            vehicleSpacesFree += car.getSize();
-            return vehicles.remove(car);
+    public boolean deleteCar(String number) {
+        for (Car truck : trucks) {
+            if (truck.getNumber().equals(number)) {
+                truckSpacesFree++;
+                return trucks.remove(truck);
+            }
+        }
+        for (Car vehicle : vehicles) {
+            if (vehicle.getNumber().equals(number)) {
+                vehicleSpacesFree += vehicle.getSize();
+                return vehicles.remove(vehicle);
+            }
         }
         return false;
     }
 
     @Override
     public boolean checkFreeSpace(int size) {
-        if (size > 1 && truckSpacesFree >= 1) {
+        if (size > Car.SIZE && truckSpacesFree >= 1) {
             return true;
         } else {
             return vehicleSpacesFree - size >= 0;

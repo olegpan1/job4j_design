@@ -1,9 +1,8 @@
 package ru.job4j.ood.lsp.parking;
 
-abstract class Car {
-    int size;
-    String number;
+interface Car {
+    int SIZE = 1;
 
-    abstract int getSize();
-    abstract String getNumber();
+    int getSize();
+    String getNumber();
 }

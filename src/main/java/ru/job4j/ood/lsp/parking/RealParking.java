@@ -43,7 +43,7 @@ public class RealParking implements Parking {
         }
         int size = car.getSize();
         boolean freeSpace = checkFreeSpace(size);
-        if (freeSpace && size > Car.SIZE && truckSpacesFree >= 1) {
+        if (freeSpace && size > Vehicle.SIZE && truckSpacesFree >= Vehicle.SIZE) {
             truckSpacesFree--;
             trucks.add(car);
             return true;
@@ -74,7 +74,7 @@ public class RealParking implements Parking {
 
     @Override
     public boolean checkFreeSpace(int size) {
-        if (size > Car.SIZE && truckSpacesFree >= 1) {
+        if (size > Vehicle.SIZE && truckSpacesFree >= Vehicle.SIZE) {
             return true;
         } else {
             return vehicleSpacesFree - size >= 0;

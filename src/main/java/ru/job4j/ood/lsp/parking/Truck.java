@@ -7,7 +7,7 @@ public record Truck(int size, String number) implements Car {
     }
 
     public void validateSize(int size) {
-        if (size <= SIZE) {
+        if (size <= Vehicle.SIZE) {
             throw new IllegalArgumentException("Wrong truck size!");
         }
     }

@@ -40,4 +40,39 @@ class ControlQualityTest {
         assertThat(shop.getFoods().get(1).getPrice()).isEqualTo(110.0);
 
     }
+
+    @Test
+    public void testClear() {
+        quality.distribute(list, apple1);
+        quality.distribute(list, apple2);
+        quality.distribute(list, apple3);
+        quality.distribute(list, apple4);
+        quality.distribute(list, apple4);
+        assertThat(ware.getFoods(), is(List.of(apple1)));
+        assertThat(trash.getFoods(), is(List.of(apple2)));
+        assertThat(shop.getFoods(), is(List.of(apple3, apple4, apple4)));
+
+        list.forEach(Store::clear);
+        assertThat(ware.getFoods()).isEmpty();
+        assertThat(trash.getFoods()).isEmpty();
+        assertThat(shop.getFoods()).isEmpty();
+
+    }
+
+    @Test
+    public void testResort() {
+        quality.distribute(list, apple1);
+        quality.distribute(list, apple2);
+        quality.distribute(list, apple3);
+        quality.distribute(list, apple4);
+        quality.distribute(list, apple4);
+        assertThat(ware.getFoods(), is(List.of(apple1)));
+        assertThat(trash.getFoods(), is(List.of(apple2)));
+        assertThat(shop.getFoods(), is(List.of(apple3, apple4, apple4)));
+
+        quality.resort();
+        assertThat(ware.getFoods(), is(List.of(apple1)));
+        assertThat(trash.getFoods(), is(List.of(apple2)));
+        assertThat(shop.getFoods(), is(List.of(apple3, apple4, apple4)));
+    }
 }

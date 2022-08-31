@@ -15,7 +15,7 @@ public class Orders {
      * Соответственно ошибка в параметре, тоже нужно использовать абстракцию, а не конкретную реализацию
      * Нужно использовать абстракцию List
      */
-    public Orders(ArrayList orders) {
+   /** public Orders(ArrayList orders) {
         this.orders = orders;
     }
 

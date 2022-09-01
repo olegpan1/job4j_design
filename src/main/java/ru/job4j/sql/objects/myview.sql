@@ -1,3 +1,8 @@
+/**
+  Самые популярные книги
+ */
+
+
 create view most_popular as
 select b.name as book_name, count(a.name) as count
 from students as s
@@ -5,4 +10,4 @@ from students as s
          join books b on o.book_id = b.id
          join authors a on b.author_id = a.id
 group by (b.name)
-order by Count desc, book_name;
+order by count desc, book_name;

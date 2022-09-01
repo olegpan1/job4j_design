@@ -16,6 +16,6 @@ values ('Мертвые души', 2);
 insert into books (name, author_id)
 values ('Вий', 2);
 insert into books (name, author_id)
-values ('Гамдет', 3);
+values ('Гамлет', 3);
 insert into books (name, author_id)
 values ('Макбет', 3);

@@ -34,7 +34,7 @@ $$
         result integer;
     begin
         delete from products where price < 100;
-        select into result count(name) from products where price > 100;
+        select into result count(name) from products where price >= 100;
         RETURN result;
     end;
 $$;
